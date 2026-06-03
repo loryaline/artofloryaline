@@ -29,7 +29,7 @@ export const BASE_GROUPS = [
     group: "Couvertures & Mise en page",
     items: [
       { id: "couv_complete", label: "Couverture complète",   desc: "Illustration + mise en page menées ensemble, direction artistique globale, fichier print-ready", min: 700, max: 1400, time: "20–30h", rev: 3, preview: "/images/environment-1.jpg", previewH: "h-72", previewPos: "object-center" },
-      { id: "couv_illu",     label: "Illustration de couverture", desc: "Illustration seule destinée à une couverture (mise en page non incluse)",                  min: 450, max: 750,  time: "14–22h", rev: 2, preview: "/images/environment-1.jpg", previewH: "h-72", previewPos: "object-center" },
+      { id: "couv_illu",     label: "Illustration de couverture", desc: "Illustration seule destinée à une couverture (mise en page non incluse). Du line art à l'illustration peinte complète.", min: 120, max: 750, time: "6–22h", rev: 2, preview: "/images/environment-1.jpg", previewH: "h-72", previewPos: "object-center" },
       { id: "mise_en_page",  label: "Mise en page seule",     desc: "Sur illustration fournie : typo, motifs, masque vernis sélectif, PDF prêt à imprimer",       min: 180, max: 350,  time: "4–8h",   rev: 2, preview: "/images/environment-1.jpg", previewH: "h-56", previewPos: "object-center" },
     ],
   },
@@ -53,7 +53,7 @@ export const EXTRAS_LIVRABLES = [
 ];
 
 export const EXTRAS_DIVERS = [
-  { id: "urgence",  label: "Urgence (livraison < 5 jours)", desc: "+25% sur le total illustration" },
+  { id: "urgence",  label: "Urgence (livraison rapide)", desc: "+25% sur le total — faisabilité et délai selon les projets" },
   { id: "rev_sup",  label: "Révision supplémentaire",       desc: "+40–60 € par révision" },
 ];
 
@@ -98,7 +98,7 @@ export const baseRates = [
   { concept: "Personnage + environnement", desc: "1 perso sur décor travaillé, ambiance lumineuse", eur: "450–620 €", chf: "430–590 CHF", time: "~14–18h", revisions: "2" },
   { concept: "Scène complète", desc: "1–2 personnages + environnement narratif riche", eur: "550–750 €", chf: "525–715 CHF", time: "~16–22h", revisions: "3" },
   { concept: "Multi-personnages", desc: "3 personnages et plus + décor complet", eur: "750–1 100 €", chf: "715–1 045 CHF", time: "~22–32h", revisions: "3 (+150–200 €/perso supp.)" },
-  { concept: "Illustration de couverture", desc: "Illustration seule destinée à une couverture (mise en page non incluse)", eur: "450–750 €", chf: "430–715 CHF", time: "~14–22h", revisions: "2" },
+  { concept: "Illustration de couverture", desc: "Illustration seule destinée à une couverture (mise en page non incluse). Du line art à l'illustration peinte complète.", eur: "120–750 €", chf: "115–715 CHF", time: "~6–22h", revisions: "2" },
   { concept: "Couverture complète", desc: "Illustration + mise en page menées ensemble, direction artistique globale, fichier print-ready", eur: "700–1 400 €", chf: "665–1 330 CHF", time: "~20–30h", revisions: "3" },
   { concept: "Mise en page seule", desc: "Sur illustration fournie : typo, motifs, masque vernis, PDF prêt à imprimer", eur: "180–350 €", chf: "170–335 CHF", time: "~4–8h", revisions: "2" },
 ];
@@ -135,6 +135,6 @@ export const extras = [
   { label: "Fichier source illustration", desc: "PSD/Procreate, calques organisés", price: "+80 € / +75 CHF" },
   { label: "Fichier source mise en page", desc: "Illustrator / InDesign éditable", price: "+120 € / +115 CHF" },
   { label: "Add-on mise en page", desc: "Typo, motifs, masque vernis, PDF print-ready", price: "+180–350 € / +170–335 CHF" },
-  { label: "Urgence", desc: "Livraison sous 5 jours ouvrés", price: "+25%" },
+  { label: "Urgence", desc: "Livraison rapide — faisabilité et délai selon les projets", price: "+25%" },
   { label: "Révision supplémentaire", desc: "Au-delà du quota inclus", price: "40–60 € / 38–57 CHF" },
 ];
