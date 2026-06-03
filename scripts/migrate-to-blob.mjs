@@ -25,19 +25,21 @@ let migrated = 0;
 for (const art of artworks) {
   if (!art.src || !art.src.startsWith("/images/")) continue;
   const filename = art.src.replace("/images/", "");
+  let buf;
   try {
-    const buf = await readFile(path.join(root, "public", "images", filename));
-    const blob = await put(`images/${filename}`, buf, {
-      access: "public",
-      addRandomSuffix: true,
-      token,
-    });
-    art.src = blob.url;
-    migrated++;
-    console.log(`✓ ${filename}`);
+    buf = await readFile(path.join(root, "public", "images", filename));
   } catch {
     console.warn(`⚠ fichier introuvable, ignoré : ${filename}`);
+    continue;
   }
+  const blob = await put(`images/${filename}`, buf, {
+    access: "public",
+    addRandomSuffix: true,
+    token,
+  });
+  art.src = blob.url;
+  migrated++;
+  console.log(`✓ ${filename}`);
 }
 
 await put("artworks.json", JSON.stringify(artworks, null, 2), {
