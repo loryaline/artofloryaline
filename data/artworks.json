@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1780416303251,
+    "src": "/images/CYBELEDONEFIXEYE.png",
+    "title": "Cybèle",
+    "category": "Portraits",
+    "year": "2026",
+    "tall": true,
+    "usage": "both",
+    "exampleFor": "buste"
+  },
+  {
+    "id": 1780418504965,
+    "src": "/images/IMG_0192_-_Copie.PNG",
+    "title": "Sancturaire",
+    "category": "Environnements",
+    "year": "2026",
+    "tall": true,
+    "usage": "both",
+    "exampleFor": "envseul"
+  },
+  {
+    "id": 1780416146521,
+    "src": "/images/Illustration_sans_titre-6.jpg",
+    "title": "Tristan",
+    "category": "Portraits",
+    "year": "2026",
+    "tall": true,
+    "usage": "both",
+    "exampleFor": "buste"
+  },
+  {
+    "id": 1780416303092,
+    "src": "/images/lory-aline-cherpit-poppiesmemoryartstationpost.jpg",
+    "title": "Le champs de coquelicots",
+    "category": "Environnements",
+    "year": "2026",
+    "tall": false,
+    "usage": "both",
+    "exampleFor": "scene"
+  },
+  {
+    "id": 1780416303288,
+    "src": "/images/IMG_0203.jpg",
+    "title": "Evras",
+    "category": "Portraits",
+    "year": "2026",
+    "tall": true,
+    "usage": "gallery",
+    "exampleFor": ""
+  },
+  {
+    "id": 1780328924762,
+    "src": "/images/portrait-3.jpg",
+    "title": "Gar",
+    "category": "Portraits",
+    "year": "2026",
+    "tall": true,
+    "usage": "gallery",
+    "exampleFor": ""
+  },
+  {
+    "id": 1780418211998,
+    "src": "/images/1752151920.png",
+    "title": "Dorure",
+    "category": "Autres",
+    "year": "2026",
+    "tall": false,
+    "usage": "examples",
+    "exampleFor": "couv_illu"
+  },
+  {
+    "id": 1780417945634,
+    "src": "/images/SF_-_Mockup_Covers_6_.png",
+    "title": "Cover",
+    "category": "Portraits",
+    "year": "2026",
+    "tall": true,
+    "usage": "examples",
+    "exampleFor": "mise_en_page"
+  },
+  {
+    "id": 1780417884213,
+    "src": "/images/Copie_de_Dark_Minimalist_Inspiration_Typographic_Quote.mp4",
+    "title": "Campagne",
+    "category": "Portraits",
+    "year": "2026",
+    "tall": false,
+    "usage": "examples",
+    "exampleFor": "da_campagne"
+  },
+  {
+    "id": 1780417884070,
+    "src": "/images/IMG_0192.PNG",
+    "title": "Couverture Illustration",
+    "category": "Portraits",
+    "year": "2026",
+    "tall": false,
+    "usage": "examples",
+    "exampleFor": "couv_illu"
+  },
+  {
+    "id": 1780417789750,
+    "src": "/images/JacketteSansFrontieres.png",
+    "title": "JacketteSansFrontieres",
+    "category": "Portraits",
+    "year": "2026",
+    "tall": false,
+    "usage": "examples",
+    "exampleFor": "couv_complete"
+  },
+  {
+    "id": 1780415126485,
+    "src": "/images/ululeprincipale__1360_x_760_px_.png",
+    "title": "ulule",
+    "category": "Autres",
+    "year": "2026",
+    "tall": false,
+    "exampleFor": "da_essentiel",
+    "usage": "examples"
+  },
+  {
+    "id": 1780418212037,
+    "src": "/images/Visitinghourstst2.png",
+    "title": "Style webtoon",
+    "category": "Autres",
+    "year": "2026",
+    "tall": false,
+    "usage": "both",
+    "exampleFor": "env"
+  },
+  {
+    "id": 1780421857881,
+    "src": "/images/Illustration2.png",
+    "title": "Style Webtoon",
+    "category": "Autres",
+    "year": "2026",
+    "tall": false,
+    "usage": "gallery",
+    "exampleFor": ""
+  }
+]
