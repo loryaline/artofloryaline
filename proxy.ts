@@ -23,7 +23,7 @@ function isAuthorized(req: NextRequest): boolean {
   }
 }
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // /api/artworks : seules les modifications sont protégées (GET reste public)

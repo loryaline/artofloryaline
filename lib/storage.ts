@@ -11,8 +11,8 @@ const ARTWORKS_KEY = "artworks.json";
 
 // ─── Images ───────────────────────────────────────────────────────────────────
 
-export async function saveImage(filename: string, data: Buffer | ArrayBuffer): Promise<string> {
-  const buffer = data instanceof Buffer ? data : Buffer.from(data);
+export async function saveImage(filename: string, data: ArrayBuffer): Promise<string> {
+  const buffer = Buffer.from(new Uint8Array(data));
 
   if (useBlob) {
     const { put } = await import("@vercel/blob");
