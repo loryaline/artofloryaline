@@ -79,8 +79,8 @@ export default function PricingReference() {
                 <p className="text-[#8a8070] text-sm mt-1 max-w-md">Illustration + mise en page menées ensemble, direction artistique globale. Calques illustration fournis à la mise en page. ~20–30h.</p>
               </div>
               <div className="text-right shrink-0">
-                <p className="font-serif text-2xl text-[#c9a84c]">700–1 400 €</p>
-                <p className="text-xs text-[#5a5040] mt-0.5">665–1 330 CHF</p>
+                <p className="font-serif text-2xl text-[#c9a84c]">1 200–1 800 €</p>
+                <p className="text-xs text-[#5a5040] mt-0.5">1 140–1 710 CHF</p>
               </div>
             </div>
           </div>

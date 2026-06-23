@@ -76,8 +76,8 @@ export default function Simulator({
     const base = BASE.find((b) => b.id === baseId);
     if (!base) return null;
 
-    const illuMin = base.min + (baseId === "multi" ? extraPersos * 150 : 0);
-    const illuMax = base.max + (baseId === "multi" ? extraPersos * 200 : 0);
+    const illuMin = base.min + (baseId === "multi" ? extraPersos * 300 : 0);
+    const illuMax = base.max + (baseId === "multi" ? extraPersos * 400 : 0);
 
     let droitsPctMin = 0;
     let droitsPctMax = 0;
@@ -103,8 +103,8 @@ export default function Simulator({
     for (const e of EXTRAS_LIVRABLES) {
       if (livrablesOn.has(e.id)) { flatMin += e.flatMin; flatMax += e.flatMax; }
     }
-    flatMin += revSup * 40;
-    flatMax += revSup * 60;
+    flatMin += revSup * 60;
+    flatMax += revSup * 90;
 
     return {
       base, illuMin, illuMax,
@@ -185,7 +185,7 @@ export default function Simulator({
                 <button onClick={() => setExtraPersos(Math.max(0, extraPersos - 1))} className="w-9 h-9 border border-[#2a2a2a] text-[#c9a84c] hover:border-[#c9a84c]/40 text-lg flex items-center justify-center">−</button>
                 <span className="font-serif text-2xl text-[#e8e0d0] w-6 text-center">{extraPersos}</span>
                 <button onClick={() => setExtraPersos(extraPersos + 1)} className="w-9 h-9 border border-[#2a2a2a] text-[#c9a84c] hover:border-[#c9a84c]/40 text-lg flex items-center justify-center">+</button>
-                <span className="text-sm text-[#8a8070]">× 150–200 € / perso</span>
+                <span className="text-sm text-[#8a8070]">× 300–400 € / perso</span>
               </div>
             </div>
           )}
@@ -265,7 +265,7 @@ export default function Simulator({
                 <button onClick={() => setRevSup(Math.max(0, revSup - 1))} className="w-9 h-9 border border-[#2a2a2a] text-[#c9a84c] hover:border-[#c9a84c]/40 text-lg flex items-center justify-center">−</button>
                 <span className="font-serif text-2xl text-[#e8e0d0] w-6 text-center">{revSup}</span>
                 <button onClick={() => setRevSup(revSup + 1)} className="w-9 h-9 border border-[#2a2a2a] text-[#c9a84c] hover:border-[#c9a84c]/40 text-lg flex items-center justify-center">+</button>
-                <span className="text-sm text-[#8a8070]">× 40–60 € / révision</span>
+                <span className="text-sm text-[#8a8070]">× 60–90 € / révision</span>
               </div>
             </div>
           )}
@@ -315,7 +315,7 @@ export default function Simulator({
                       {baseId === "multi" && extraPersos > 0 && (
                         <div className="flex justify-between items-baseline gap-4">
                           <p className="text-sm text-[#8a8070]">+{extraPersos} perso{extraPersos > 1 ? "s" : ""} supp.</p>
-                          <p className="text-base text-[#e8e0d0] shrink-0">+{extraPersos * 150}–{extraPersos * 200} €</p>
+                          <p className="text-base text-[#e8e0d0] shrink-0">+{extraPersos * 300}–{extraPersos * 400} €</p>
                         </div>
                       )}
                       {EXTRAS_LIVRABLES.filter((e) => livrablesOn.has(e.id)).map((e) => (
@@ -339,7 +339,7 @@ export default function Simulator({
                       {revSup > 0 && (
                         <div className="flex justify-between items-baseline gap-4">
                           <p className="text-sm text-[#8a8070]">{revSup} révision{revSup > 1 ? "s" : ""} supp.</p>
-                          <p className="text-base text-[#e8e0d0] shrink-0">+{revSup * 40}–{revSup * 60} €</p>
+                          <p className="text-base text-[#e8e0d0] shrink-0">+{revSup * 60}–{revSup * 90} €</p>
                         </div>
                       )}
                     </div>
