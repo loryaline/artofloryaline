@@ -37,7 +37,7 @@ export const BASE_GROUPS = [
   {
     group: "Direction artistique",
     items: [
-      { id: "da_essentiel", label: "Essentiel",          desc: "DA + illustration principale + 2 visuels secondaires + bannière campagne",            min: 1500, max: 2400, time: "25–40h", rev: 3, preview: "/images/environment-1.jpg", previewH: "h-72", previewPos: "object-center" },
+      { id: "da_essentiel", label: "Essentiel",          desc: "Direction artistique + illustration principale + 2 visuels secondaires + bannière campagne",            min: 1500, max: 2400, time: "25–40h", rev: 3, preview: "/images/environment-1.jpg", previewH: "h-72", previewPos: "object-center" },
       { id: "da_campagne",  label: "Campagne complète",   desc: "Essentiel + 3–5 illustrations secondaires + goodies + visuels réseaux sociaux",       min: 3000, max: 4800, time: "50–80h", rev: 4, preview: "/images/environment-1.jpg", previewH: "h-72", previewPos: "object-center" },
     ],
   },
@@ -123,7 +123,7 @@ export const directionArtistique = {
     { label: "Révisions coordonnées", detail: "Retours groupés pour maintenir la cohérence de l'ensemble" },
   ],
   formules: [
-    { name: "Essentiel", desc: "DA + illustration principale + 2 visuels secondaires + bannière campagne", eur: "1 500–2 400 €", chf: "1 425–2 280 CHF" },
+    { name: "Essentiel", desc: "Direction artistique + illustration principale + 2 visuels secondaires + bannière campagne", eur: "1 500–2 400 €", chf: "1 425–2 280 CHF" },
     { name: "Campagne complète", desc: "Essentiel + 3–5 illustrations secondaires + goodies (2 formats) + réseaux", eur: "3 000–4 800 €", chf: "2 850–4 560 CHF" },
     { name: "Sur mesure", desc: "Projet d'envergure, catalogue d'illustrations, univers complet. Devis après brief.", eur: "Sur devis", chf: "Sur devis" },
   ],
