@@ -100,11 +100,13 @@ export default function AboutPage() {
                 de l&apos;illustration à la mise en page — et livrer une couverture ou une direction artistique complète, clé en main.
               </p>
               <p>
-                Je travaille par ailleurs chez <span className="text-[#e8e0d0]">Adobe</span>, où j&apos;exerce en tant que{" "}
-                <span className="text-[#e8e0d0]">product manager</span>. Je maîtrise donc l&apos;ensemble des outils nécessaires
-                au bon déroulement d&apos;un projet créatif, et j&apos;apporte un professionnalisme accru dans la{" "}
-                <span className="text-[#e8e0d0]">gestion de projet</span>{" : "}briefs clairs, jalons respectés, communication fluide.
-                Tu bénéficies d&apos;une artiste, mais aussi d&apos;une cheffe de projet rigoureuse.
+                Mon parcours ne s&apos;est pas construit que devant une toile : il s&apos;est aussi forgé dans le{" "}
+                <span className="text-[#e8e0d0]">product management</span>. J&apos;y ai appris à penser non pas un simple
+                projet, mais un <span className="text-[#e8e0d0]">produit dans son ensemble</span> — sa cohérence, ses enjeux,
+                son public. Cette vision me permet de m&apos;adapter à chaque commande et de te proposer les{" "}
+                <span className="text-[#e8e0d0]">meilleures options</span> selon ton projet, avec la rigueur d&apos;un cadre pro :
+                briefs clairs, jalons tenus, communication fluide. Tu t&apos;entoures d&apos;une artiste, mais aussi d&apos;une
+                cheffe de projet fiable.
               </p>
             </div>
 
