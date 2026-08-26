@@ -39,7 +39,8 @@ export async function readArtworks(): Promise<unknown[]> {
       const { blobs } = await list({ prefix: ARTWORKS_KEY });
       const found = blobs.find((b) => b.pathname === ARTWORKS_KEY);
       if (!found) return [];
-      const res = await fetch(found.url, { cache: "no-store" });
+      // Cache-buster : on force une lecture fraîche (les blobs publics sont mis en cache)
+      const res = await fetch(`${found.url}?ts=${Date.now()}`, { cache: "no-store" });
       if (!res.ok) return [];
       return await res.json();
     } catch {
@@ -62,6 +63,7 @@ export async function writeArtworks(data: unknown): Promise<void> {
       addRandomSuffix: false,
       allowOverwrite: true,
       contentType: "application/json",
+      cacheControlMaxAge: 0, // pas de cache CDN sur l'index (données fraîches)
     });
     return;
   }

@@ -47,6 +47,7 @@ await put("artworks.json", JSON.stringify(artworks, null, 2), {
   addRandomSuffix: false,
   allowOverwrite: true,
   contentType: "application/json",
+  cacheControlMaxAge: 0,
   token,
 });
 
