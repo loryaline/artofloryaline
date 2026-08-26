@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { Trash2, Upload, Edit2, Check, X, Plus, ArrowLeft, ArrowRight } from "lucide-react";
+import { upload } from "@vercel/blob/client";
 import { BASE_OPTIONS, isVideo } from "@/lib/pricing";
 
 type Usage = "gallery" | "examples" | "both";
@@ -69,6 +70,7 @@ function UsagePicker({ value, onChange }: { value: Usage; onChange: (u: Usage) =
 export default function AdminPage() {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<Partial<Artwork>>({});
@@ -101,20 +103,29 @@ export default function AdminPage() {
   const uploadAll = async () => {
     if (!pendingFiles.length) return;
     setUploading(true);
-    for (const item of pendingFiles) {
-      const fd = new FormData();
-      fd.append("file", item.file);
-      const res = await fetch("/api/upload", { method: "POST", body: fd });
-      const { url } = await res.json();
-      await fetch("/api/artworks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ src: url, title: item.title, category: item.category, year: item.year, tall: item.tall, usage: item.usage, exampleFor: item.exampleFor }),
-      });
+    setUploadError(null);
+    try {
+      for (const item of pendingFiles) {
+        const safeName = item.file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        // Upload direct navigateur → Blob (pas de limite de taille serveur)
+        const blob = await upload(`images/${safeName}`, item.file, {
+          access: "public",
+          handleUploadUrl: "/api/blob-upload",
+          contentType: item.file.type || undefined,
+        });
+        await fetch("/api/artworks", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ src: blob.url, title: item.title, category: item.category, year: item.year, tall: item.tall, usage: item.usage, exampleFor: item.exampleFor }),
+        });
+      }
+      setPendingFiles([]);
+      fetchArtworks();
+    } catch (e) {
+      setUploadError((e as Error).message || "Échec de l'upload. Réessaie.");
+    } finally {
+      setUploading(false);
     }
-    setPendingFiles([]);
-    setUploading(false);
-    fetchArtworks();
   };
 
   const deleteArtwork = async (id: number) => {
@@ -207,6 +218,9 @@ export default function AdminPage() {
                 {uploading ? "Upload en cours…" : "Tout publier"}
               </button>
             </div>
+            {uploadError && (
+              <p className="text-sm text-red-400 border border-red-500/30 bg-red-500/5 px-4 py-2 mb-4">{uploadError}</p>
+            )}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {pendingFiles.map((item, i) => (
                 <div key={i} className="border border-[#1e1e1e] p-3 space-y-3">
