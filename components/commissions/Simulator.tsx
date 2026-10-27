@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import Image from "next/image";
 import { Check } from "lucide-react";
 import {
-  BASE_GROUPS, BASE, EXTRAS_LIVRABLES, EXTRAS_DIVERS, DROITS, PACKS,
+  BASE_GROUPS, BASE, EXTRAS_LIVRABLES, EXTRAS_DIVERS, DROITS, PACKS, MAQUETTE_TIERS,
   fmt, chf, isVideo,
 } from "@/lib/pricing";
 
@@ -71,13 +71,24 @@ export default function Simulator({
   const [packId, setPackId]           = useState<string | null>(null);
   const [extraPersos, setExtraPersos] = useState(0);
   const [revSup, setRevSup]           = useState(0);
+  const [maquetteTier, setMaquetteTier] = useState(MAQUETTE_TIERS[0].id);
 
   const result = useMemo(() => {
     const base = BASE.find((b) => b.id === baseId);
     if (!base) return null;
 
-    const illuMin = base.min + (baseId === "multi" ? extraPersos * 300 : 0);
-    const illuMax = base.max + (baseId === "multi" ? extraPersos * 400 : 0);
+    // Maquettage de livre : forfait par tranche de pagination (peut être "sur devis")
+    let devis = false;
+    let illuMin: number;
+    let illuMax: number;
+    if (baseId === "maquette_livre") {
+      const tier = MAQUETTE_TIERS.find((t) => t.id === maquetteTier);
+      if (!tier || tier.price == null) { devis = true; illuMin = 0; illuMax = 0; }
+      else { illuMin = tier.price; illuMax = tier.price; }
+    } else {
+      illuMin = base.min + (baseId === "multi" ? extraPersos * 300 : 0);
+      illuMax = base.max + (baseId === "multi" ? extraPersos * 400 : 0);
+    }
 
     let droitsPctMin = 0;
     let droitsPctMax = 0;
@@ -107,13 +118,13 @@ export default function Simulator({
     flatMax += revSup * 90;
 
     return {
-      base, illuMin, illuMax,
+      base, illuMin, illuMax, devis,
       droitsMin, droitsMax, droitsPctMin, droitsPctMax,
       urgMin, urgMax,
       totalMin: illuTotalMin + urgMin + flatMin,
       totalMax: illuTotalMax + urgMax + flatMax,
     };
-  }, [baseId, livrablesOn, diversOn, droitsOn, packId, extraPersos, revSup]);
+  }, [baseId, livrablesOn, diversOn, droitsOn, packId, extraPersos, revSup, maquetteTier]);
 
   const isReady = result !== null;
   const selectedPack = packId ? PACKS.find((p) => p.id === packId) : null;
@@ -125,7 +136,12 @@ export default function Simulator({
     let grandMin = 0, grandMax = 0;
 
     if (result) {
-      lines.push(`Concept : ${result.base.label} (${fmt(result.illuMin)}–${fmt(result.illuMax)} €)`);
+      const basePrice = result.devis ? "sur devis" : result.illuMin === result.illuMax ? `${fmt(result.illuMin)} €` : `${fmt(result.illuMin)}–${fmt(result.illuMax)} €`;
+      lines.push(`Concept : ${result.base.label} (${basePrice})`);
+      if (baseId === "maquette_livre") {
+        const tier = MAQUETTE_TIERS.find((t) => t.id === maquetteTier);
+        if (tier) lines.push(`Pagination : ${tier.label}`);
+      }
       if (baseId === "multi" && extraPersos > 0) lines.push(`Personnages supp. : +${extraPersos}`);
       const livr = EXTRAS_LIVRABLES.filter((e) => livrablesOn.has(e.id)).map((e) => e.label);
       if (livr.length) lines.push(`Livrables : ${livr.join(", ")}`);
@@ -137,7 +153,13 @@ export default function Simulator({
       grandMin += result.totalMin; grandMax += result.totalMax;
     }
     lines.push("");
-    lines.push(`TOTAL ESTIMÉ : ${fmt(grandMin)}–${fmt(grandMax)} € (≈ ${chf(grandMin)}–${chf(grandMax)} CHF)`);
+    if (result?.devis) {
+      lines.push("TOTAL ESTIMÉ : sur devis (selon la pagination)");
+    } else {
+      const totalStr = grandMin === grandMax ? `${fmt(grandMin)} €` : `${fmt(grandMin)}–${fmt(grandMax)} €`;
+      const chfStr = grandMin === grandMax ? `${chf(grandMin)} CHF` : `${chf(grandMin)}–${chf(grandMax)} CHF`;
+      lines.push(`TOTAL ESTIMÉ : ${totalStr} (≈ ${chfStr})`);
+    }
     lines.push("");
     lines.push("Détails du projet : ");
 
@@ -186,6 +208,28 @@ export default function Simulator({
                 <span className="font-serif text-2xl text-[#e8e0d0] w-6 text-center">{extraPersos}</span>
                 <button onClick={() => setExtraPersos(extraPersos + 1)} className="w-9 h-9 border border-[#2a2a2a] text-[#c9a84c] hover:border-[#c9a84c]/40 text-lg flex items-center justify-center">+</button>
                 <span className="text-sm text-[#8a8070]">× 300–400 € / perso</span>
+              </div>
+            </div>
+          )}
+
+          {baseId === "maquette_livre" && (
+            <div className="mt-4 border border-[#c9a84c]/20 p-5">
+              <p className="text-sm text-[#e8e0d0] mb-3">Nombre de pages du livre</p>
+              <div className="grid grid-cols-2 gap-2">
+                {MAQUETTE_TIERS.map((t) => (
+                  <button
+                    key={t.id}
+                    onClick={() => setMaquetteTier(t.id)}
+                    className={`border p-3 text-left transition-colors ${
+                      maquetteTier === t.id ? "border-[#c9a84c] bg-[#c9a84c]/8" : "border-[#1e1e1e] hover:border-[#c9a84c]/30"
+                    }`}
+                  >
+                    <span className="block text-sm text-[#e8e0d0]">{t.label}</span>
+                    <span className="block text-sm text-[#c9a84c] mt-0.5 font-serif">
+                      {t.price == null ? "Sur devis" : `${fmt(t.price)} €`}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
           )}
@@ -310,7 +354,9 @@ export default function Simulator({
                     <div className="space-y-3">
                       <div className="flex justify-between items-baseline gap-4">
                         <p className="text-sm text-[#8a8070]">{result.base.label}</p>
-                        <p className="text-base text-[#e8e0d0] shrink-0">{fmt(result.illuMin)}–{fmt(result.illuMax)} €</p>
+                        <p className="text-base text-[#e8e0d0] shrink-0">
+                          {result.devis ? "Sur devis" : result.illuMin === result.illuMax ? `${fmt(result.illuMin)} €` : `${fmt(result.illuMin)}–${fmt(result.illuMax)} €`}
+                        </p>
                       </div>
                       {baseId === "multi" && extraPersos > 0 && (
                         <div className="flex justify-between items-baseline gap-4">
@@ -371,18 +417,26 @@ export default function Simulator({
                     <div className="h-px bg-[#c9a84c]/20" />
                     <div className="flex justify-between items-baseline gap-4">
                       <p className="text-base text-[#e8e0d0] font-medium">Total estimé</p>
-                      <p className="font-serif text-3xl text-[#c9a84c] shrink-0">{fmt(result.totalMin)}–{fmt(result.totalMax)} €</p>
+                      <p className="font-serif text-3xl text-[#c9a84c] shrink-0">
+                        {result.devis ? "Sur devis" : result.totalMin === result.totalMax ? `${fmt(result.totalMin)} €` : `${fmt(result.totalMin)}–${fmt(result.totalMax)} €`}
+                      </p>
                     </div>
-                    <div className="flex justify-between items-baseline gap-4 -mt-2">
-                      <p className="text-xs text-[#5a5040]">En CHF (indicatif)</p>
-                      <p className="font-serif text-lg text-[#7a6530] shrink-0">{chf(result.totalMin)}–{chf(result.totalMax)} CHF</p>
-                    </div>
+                    {!result.devis && (
+                      <>
+                        <div className="flex justify-between items-baseline gap-4 -mt-2">
+                          <p className="text-xs text-[#5a5040]">En CHF (indicatif)</p>
+                          <p className="font-serif text-lg text-[#7a6530] shrink-0">
+                            {result.totalMin === result.totalMax ? `${chf(result.totalMin)} CHF` : `${chf(result.totalMin)}–${chf(result.totalMax)} CHF`}
+                          </p>
+                        </div>
 
-                    {/* Acompte */}
-                    <div className="border border-[#1e1e1e] p-4">
-                      <p className="text-xs text-[#5a5040] tracking-wider uppercase mb-1">Acompte (40–50%)</p>
-                      <p className="font-serif text-xl text-[#8a8070]">{fmt(result.totalMin * 0.4)}–{fmt(result.totalMax * 0.5)} €</p>
-                    </div>
+                        {/* Acompte */}
+                        <div className="border border-[#1e1e1e] p-4">
+                          <p className="text-xs text-[#5a5040] tracking-wider uppercase mb-1">Acompte (40–50%)</p>
+                          <p className="font-serif text-xl text-[#8a8070]">{fmt(result.totalMin * 0.4)}–{fmt(result.totalMax * 0.5)} €</p>
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
 

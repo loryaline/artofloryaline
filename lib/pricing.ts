@@ -32,6 +32,7 @@ export const BASE_GROUPS = [
       { id: "couv_complete", label: "Couverture complète",   desc: "Illustration + mise en page menées ensemble, direction artistique globale, fichier print-ready", min: 1200, max: 1800, time: "20–30h", rev: 3, preview: "/images/environment-1.jpg", previewH: "h-72", previewPos: "object-center" },
       { id: "couv_illu",     label: "Illustration de couverture", desc: "Illustration seule destinée à une couverture (mise en page non incluse). Du line art à l'illustration peinte complète.", min: 240, max: 1320, time: "4–22h", rev: 2, preview: "/images/environment-1.jpg", previewH: "h-72", previewPos: "object-center" },
       { id: "mise_en_page",  label: "Mise en page seule",     desc: "Sur illustration ou éléments fournis : typo, motifs, masque vernis, PDF prêt à imprimer. Aussi pour des templates & kits de campagne montés à partir d'assets libres de droits.", min: 240, max: 480, time: "4–8h", rev: 2, preview: "/images/environment-1.jpg", previewH: "h-56", previewPos: "object-center" },
+      { id: "maquette_livre", label: "Maquettage intérieur de livre", desc: "Mise en page des pages intérieures : gabarit, styles de texte, titres de chapitres, ornements, pagination, fichier print-ready. Forfait selon la pagination.", min: 500, max: 950, time: "8–20h", rev: 2, preview: "/images/environment-1.jpg", previewH: "h-72", previewPos: "object-center" },
     ],
   },
   {
@@ -74,6 +75,14 @@ export const PACKS = [
   { id: "edition", label: "Pack édition complète", desc: "Diffusion + promotion + exploitation édito (distribution large, durée)", pctMin: 0.70, pctMax: 0.95 },
 ];
 
+// Forfaits maquettage intérieur de livre, par tranche de pagination
+export const MAQUETTE_TIERS: { id: string; label: string; price: number | null }[] = [
+  { id: "m200",  label: "Jusqu'à ~200 pages",   price: 500 },
+  { id: "m350",  label: "~200 à 350 pages",     price: 700 },
+  { id: "m500",  label: "~350 à 500 pages",     price: 950 },
+  { id: "mplus", label: "Plus de 500 pages",    price: null }, // sur devis
+];
+
 export const EUR_TO_CHF = 0.95;
 
 export function isVideo(src: string) {
@@ -99,6 +108,7 @@ export const baseRates = [
   { concept: "Illustration de couverture", desc: "Illustration seule destinée à une couverture (mise en page non incluse). Du line art à l'illustration peinte complète.", eur: "240–1 320 €", chf: "230–1 255 CHF", time: "~4–22h", revisions: "2" },
   { concept: "Couverture complète", desc: "Illustration + mise en page menées ensemble, direction artistique globale, fichier print-ready", eur: "1 200–1 800 €", chf: "1 140–1 710 CHF", time: "~20–30h", revisions: "3" },
   { concept: "Mise en page seule", desc: "Sur illustration ou éléments fournis : typo, motifs, masque vernis, PDF prêt à imprimer. Aussi pour des templates & kits de campagne montés à partir d'assets libres de droits.", eur: "240–480 €", chf: "230–455 CHF", time: "~4–8h", revisions: "2" },
+  { concept: "Maquettage intérieur de livre", desc: "Mise en page des pages intérieures (gabarit, styles, titres de chapitres, ornements, pagination, print-ready). Forfait : jusqu'à 200p ~500 €, 200–350p ~700 €, 350–500p ~950 €, au-delà sur devis.", eur: "dès 500 €", chf: "dès 475 CHF", time: "~8–20h", revisions: "2" },
 ];
 
 export const rights = [
