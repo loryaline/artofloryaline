@@ -31,7 +31,7 @@ export const BASE_GROUPS = [
     items: [
       { id: "couv_complete", label: "Couverture complète",   desc: "Illustration + mise en page menées ensemble, direction artistique globale, fichier print-ready", min: 1200, max: 1800, time: "20–30h", rev: 3, preview: "/images/environment-1.jpg", previewH: "h-72", previewPos: "object-center" },
       { id: "couv_illu",     label: "Illustration de couverture", desc: "Illustration seule destinée à une couverture (mise en page non incluse). Du line art à l'illustration peinte complète.", min: 240, max: 1320, time: "4–22h", rev: 2, preview: "/images/environment-1.jpg", previewH: "h-72", previewPos: "object-center" },
-      { id: "mise_en_page",  label: "Mise en page seule",     desc: "Sur illustration fournie : typo, motifs, masque vernis sélectif, PDF prêt à imprimer",       min: 240, max: 480,  time: "4–8h",   rev: 2, preview: "/images/environment-1.jpg", previewH: "h-56", previewPos: "object-center" },
+      { id: "mise_en_page",  label: "Mise en page seule",     desc: "Sur illustration ou éléments fournis : typo, motifs, masque vernis, PDF prêt à imprimer. Aussi pour des templates & kits de campagne montés à partir d'assets libres de droits.", min: 240, max: 480, time: "4–8h", rev: 2, preview: "/images/environment-1.jpg", previewH: "h-56", previewPos: "object-center" },
     ],
   },
   {
@@ -70,7 +70,7 @@ export const DROITS = [
 ];
 
 export const PACKS = [
-  { id: "auto",    label: "Pack auto-édition",     desc: "Diffusion + promotion",                      pctMin: 0.40, pctMax: 0.55 },
+  { id: "auto",    label: "Pack Indépendant",      desc: "Diffusion + promotion",                      pctMin: 0.40, pctMax: 0.55 },
   { id: "edition", label: "Pack édition complète", desc: "Diffusion + promotion + exploitation édito (distribution large, durée)", pctMin: 0.70, pctMax: 0.95 },
 ];
 
@@ -98,7 +98,7 @@ export const baseRates = [
   { concept: "Multi-personnages", desc: "3 personnages et plus + décor complet", eur: "1 320–1 920 €", chf: "1 255–1 825 CHF", time: "~22–32h", revisions: "3 (+300–400 €/perso supp.)" },
   { concept: "Illustration de couverture", desc: "Illustration seule destinée à une couverture (mise en page non incluse). Du line art à l'illustration peinte complète.", eur: "240–1 320 €", chf: "230–1 255 CHF", time: "~4–22h", revisions: "2" },
   { concept: "Couverture complète", desc: "Illustration + mise en page menées ensemble, direction artistique globale, fichier print-ready", eur: "1 200–1 800 €", chf: "1 140–1 710 CHF", time: "~20–30h", revisions: "3" },
-  { concept: "Mise en page seule", desc: "Sur illustration fournie : typo, motifs, masque vernis, PDF prêt à imprimer", eur: "240–480 €", chf: "230–455 CHF", time: "~4–8h", revisions: "2" },
+  { concept: "Mise en page seule", desc: "Sur illustration ou éléments fournis : typo, motifs, masque vernis, PDF prêt à imprimer. Aussi pour des templates & kits de campagne montés à partir d'assets libres de droits.", eur: "240–480 €", chf: "230–455 CHF", time: "~4–8h", revisions: "2" },
 ];
 
 export const rights = [
@@ -108,7 +108,7 @@ export const rights = [
 ];
 
 export const packsRef = [
-  { name: "Pack auto-édition", desc: "Diffusion + promotion. Pour l'auteur qui vend lui-même son livre.", rate: "+40–55%" },
+  { name: "Pack Indépendant", desc: "Diffusion + promotion. Pour l'auteur indépendant qui vend lui-même son livre.", rate: "+40–55%" },
   { name: "Pack édition complète", desc: "Diffusion + promotion, exploitation par une structure éditoriale (distribution large, durée). Dérivés en sus.", rate: "+70–95%" },
 ];
 
